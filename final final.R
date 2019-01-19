@@ -1,6 +1,8 @@
 # Libreria encargada de leer el html
 library(rvest)
 
+# FALTA: abrir un csv y pasarlo a dataframe
+
 # DataFrame encargado de almacenar la informacion
 datosJuntos = data.frame()
 
@@ -47,6 +49,11 @@ for(i in 1:3){
     
   }
 }
+
+
+### FALTA: Guardar la infomación en CSV
+
+#### Esto ya no es necesario
 
 tablajunta <- as.data.frame(t(tablajunta[,-1]))
 
