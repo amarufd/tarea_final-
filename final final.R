@@ -1,7 +1,7 @@
 # Libreria encargada de leer el html
 library(rvest)
 
-# FALTA: abrir un csv y pasarlo a dataframe
+# FALTA: abrir un csv y pasarlo a data.frame
 
 # DataFrame encargado de almacenar la informacion
 datosJuntos = data.frame()
@@ -50,8 +50,12 @@ for(i in 1:3){
   }
 }
 
+### FALTA: Unificar registros nuevos con los del CSV
+
 
 ### FALTA: Guardar la infomación en CSV
+
+
 
 #### Esto ya no es necesario
 
