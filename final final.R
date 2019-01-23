@@ -3,9 +3,10 @@ library(rvest)
 
 # FALTA: abrir un csv y pasarlo a data.frame ( no se si esto esta bueno, pero lo intente esto era que opina, no corre
 #parece que me falta un } alggo asi :( )
-if(file.exists("filedatosJuntos.cvs")){
+if(file.exists("todoslosperros.cvs")){
   print("todoslosperros.cvs")
-  filedatosJuntos <- read.table(file = "filedatosJuntos.cvs", header = TRUE, sep = " ")
+  filedatosJuntos <- read.csv(file = "todoslosperros.cvs", header = TRUE)
+}
   
   # DataFrame encargado de almacenar la informacion
   datosJuntos = data.frame()
@@ -49,40 +50,43 @@ if(file.exists("filedatosJuntos.cvs")){
       # Union de dataFrames
       datosJuntos <- rbind(datosJuntos,tablajunta)
       
-      #para graficar
-      library('ggplot2')
-      
-      #Grafico de barra 
-      datosJuntos %>%
-        ggplot() +
-        aes(x = Edad, y = Nombre) +
-        geom_bar(stat="identity")
-      
-      #Grafico de barra 
-      datosJuntos %>%
-        ggplot() +
-        aes(x = Edad, y = Tamaño) +
-        geom_bar(stat="identity")
-      
-      
-      #Grafico boxplo
-      datosJuntos %>%
-        ggplot() +
-        geom_boxplot(aes(x = Nombre, y = Edad)) +
-        theme_bw()
-      
-      #guardar la informacion en cvs
-      write.csv(datosJuntos, file = "todoslosperros.cvs")
-      
     }
-  } 
+  }
   
-}
+  # elimina datos duplicados
+  datosJuntos <- unique(datosJuntos)
+  
+  #Unificar registros nuevos con los del CSV
+  if(exists("filedatosJuntos")){
+    print("Uniendo los DataFrames")
+    # puede hacer la combinación con rbind ya implementado mas arriba
+  }
+  
+  #guardar la informacion en cvs
+  write.csv(datosJuntos, file = "todoslosperros.cvs")
+  
+  
+  #para graficar
+  library('ggplot2')
+  
+  #Grafico de barra 
+  datosJuntos %>%
+    ggplot() +
+    aes(x = Edad, y = Nombre) +
+    geom_bar(stat="identity")
+  
+  #Grafico de barra 
+  datosJuntos %>%
+    ggplot() +
+    aes(x = Edad, y = Tamaño) +
+    geom_bar(stat="identity")
+  
+  
+  #Grafico boxplo
+  datosJuntos %>%
+    ggplot() +
+    geom_boxplot(aes(x = Nombre, y = Edad)) +
+    theme_bw()
 
 
 
-#Unificar registros nuevos con los del CSV ( esto va adentro pero si no me corre con los 
-#por los  {}  muerooooooooooooooooooooooo)
-if(exists("filedatosJuntos")){
-  print("Uniendo los DataFrames")
-}
