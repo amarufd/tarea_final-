@@ -1,13 +1,15 @@
 # Libreria encargada de leer el html
 library(rvest)
 
-# FALTA: abrir un csv y pasarlo a data.frame
+# FALTA: abrir un csv y pasarlo a data.frame ( no se si esto esta bueno, pero lo intente esto era que opina, no corre
+#parece que me falta un } alggo asi :( )
+if(file.exists("filedatosJuntos.cvs")){
+  print("todoslosperros.cvs")
+  filedatosJuntos <- read.table(file = "filedatosJuntos.cvs", header = TRUE, sep = " ")
 
 # DataFrame encargado de almacenar la informacion
 datosJuntos = data.frame()
-
-
-# comentarios profe
+  
 for(i in 1:3){
   print(paste("http://www.garrasypatas.cl/perros/page/",i,"/",sep = ""))
   
@@ -47,13 +49,7 @@ for(i in 1:3){
     # Union de dataFrames
     datosJuntos <- rbind(datosJuntos,tablajunta)
     
-    #unificancion de registros nuevos con los del cvs
-    
-    
-    #guardar la informacion en cvs
-    write.csv(datosJuntos, file = "todoslosperros")
-    
-    #para hacer graficos
+    #para graficar
     library('ggplot2')
     
     #Grafico de barra 
@@ -74,5 +70,24 @@ for(i in 1:3){
       ggplot() +
       geom_boxplot(aes(x = Nombre, y = Edad)) +
       theme_bw()
-}
+    
+    #guardar la informacion en cvs
+    write.csv(datosJuntos, file = "todoslosperros.cvs")
+    
+  }
+} 
+  
+  }
+
+
+
+#Unificar registros nuevos con los del CSV ( esto va adentro pero si no me corre con los 
+#por los  {}  muerooooooooooooooooooooooo)
+    if(exists("filedatosJuntos")){
+      print("Uniendo los DataFrames")
+    
+
+
+
+
 
